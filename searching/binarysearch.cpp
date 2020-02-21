@@ -1,4 +1,5 @@
 #include <iostream>
+#include "./../sorting/quickSort.h"
 using namespace std;
 class BS
 {
@@ -8,57 +9,45 @@ public:
         int low = 1;
         int high = num;
         int mid;
-    do
-    {
-        mid = (low + high) / 2;
-        if (keynum < array[mid])
+        do
         {
-            high = mid - 1;
-        }
-   	else if (keynum > array[mid])
-        {
-            low = mid + 1;
-        }
-	}
-	while (keynum != array[mid] && low <= high);
+            mid = (low + high) / 2;
+            if (keynum < array[mid])
+            {
+                high = mid - 1;
+            }
+            else if (keynum > array[mid])
+            {
+                low = mid + 1;
+            }
+        } while (keynum != array[mid] && low <= high);
         if (keynum == array[mid])
         {
-            cout<<"SEARCH SUCCESSFUL \n";
+            cout << "SEARCH SUCCESSFUL \n";
         }
         else
         {
-            cout<<"SEARCH FAILED \n";
+            cout << "SEARCH FAILED \n";
         }
     }
 };
 int main()
 {
-    int array[10];
-    int i, j, num, temp, keynum;
+    int array[MAX_SIZE];
+    int i, j, temp, keynum;
     int low, mid, high;
-    cout<<"Enter the value of num \n";
-    cin>>num;
-    cout<<"Enter the elements one by one \n";
-    for (i = 0; i < num; i++)
+    cout << "Enter the value of num \n";
+    cin >> length;
+    cout << "Enter the elements one by one \n";
+    for (i = 0; i < length; i++)
     {
-        cin>>array[i];
+        cin >> array[i];
     }
-    //bubble sort
-    for (i = 0; i < num; i++)
-    {
-        for (j = 0; j < (num - i - 1); j++)
-        {
-            if (array[j] > array[j + 1])
-            {
-                temp = array[j];
-                array[j] = array[j + 1];
-                array[j + 1] = temp;
-            }
-        }
-    }
-    cout<<"Enter the element to be searched \n";
-    cin>>keynum;
+    //Quick SORT
+    quickSort(array, 0, length - 1);
+    cout << "Enter the element to be searched \n";
+    cin >> keynum;
     BS b1;
-    b1.BinarySearch(array, keynum, num);
+    b1.BinarySearch(array, keynum, length);
     return 0;
 }
